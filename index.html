@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognitive Layer | AI Operators for Modern Teams</title>
+  <meta
+    name="description"
+    content="Cognitive Layer designs reliable AI operators for support, revenue, finance, and back-office teams."
+  >
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050605;
+      --panel: rgba(18, 21, 19, 0.84);
+      --panel-strong: rgba(28, 31, 27, 0.92);
+      --line: rgba(232, 235, 226, 0.11);
+      --line-strong: rgba(232, 235, 226, 0.2);
+      --text: #f4f6ef;
+      --muted: rgba(244, 246, 239, 0.72);
+      --dim: rgba(244, 246, 239, 0.5);
+      --green: #9ce7bd;
+      --cyan: #9fdde0;
+      --amber: #f1c86a;
+      --ink: #09100c;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+      --radius: 8px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(5, 6, 5, 0.2), var(--bg) 620px),
+        linear-gradient(135deg, rgba(156, 231, 189, 0.11), transparent 34%),
+        linear-gradient(215deg, rgba(241, 200, 106, 0.08), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      letter-spacing: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        linear-gradient(rgba(244, 246, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 246, 239, 0.035) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    p,
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      z-index: 30;
+      width: min(1040px, calc(100% - 32px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 10px 12px 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(5, 6, 5, 0.72);
+      box-shadow: 0 12px 42px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transform: translateX(-50%);
+      transition: background 180ms var(--ease), border-color 180ms var(--ease);
+    }
+
+    .site-nav.is-scrolled {
+      background: rgba(5, 6, 5, 0.92);
+      border-color: var(--line-strong);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(156, 231, 189, 0.45);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(156, 231, 189, 0.25), rgba(159, 221, 224, 0.08)),
+        rgba(255, 255, 255, 0.03);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      transition: color 160ms var(--ease);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-links .button-primary {
+      color: var(--ink);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .nav-toggle span,
+    .nav-toggle::before,
+    .nav-toggle::after {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 4px auto;
+      background: currentColor;
+      border-radius: 999px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      color: var(--text);
+      font-weight: 700;
+      transition: transform 160ms var(--ease), background 160ms var(--ease), border-color 160ms var(--ease);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(244, 246, 239, 0.36);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .button-primary {
+      border-color: transparent;
+      background: var(--text);
+      color: var(--ink);
+    }
+
+    .button-primary:hover,
+    .button-primary:focus-visible {
+      background: #ffffff;
+    }
+
+    .button-small {
+      min-height: 38px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 88svh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 130px 22px 64px;
+      border-bottom: 1px solid rgba(244, 246, 239, 0.08);
+    }
+
+    .hero-scene {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .scene-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(156, 231, 189, 0.36), transparent);
+      transform-origin: center;
+      animation: driftLine 9s var(--ease) infinite;
+    }
+
+    .scene-line.line-1 {
+      top: 24%;
+      left: -8%;
+      width: 56%;
+      transform: rotate(8deg);
+    }
+
+    .scene-line.line-2 {
+      top: 46%;
+      right: -6%;
+      width: 52%;
+      transform: rotate(-11deg);
+      animation-delay: -3s;
+    }
+
+    .scene-line.line-3 {
+      bottom: 25%;
+      left: 18%;
+      width: 64%;
+      transform: rotate(2deg);
+      animation-delay: -6s;
+    }
+
+    .scene-node {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 1px solid rgba(244, 246, 239, 0.22);
+      border-radius: 50%;
+      background: rgba(5, 6, 5, 0.7);
+      box-shadow: 0 0 0 8px rgba(156, 231, 189, 0.05);
+      animation: pulseNode 3.2s ease-in-out infinite;
+    }
+
+    .node-1 {
+      top: 25%;
+      left: 16%;
+    }
+
+    .node-2 {
+      top: 44%;
+      right: 18%;
+      animation-delay: -1s;
+    }
+
+    .node-3 {
+      bottom: 26%;
+      left: 29%;
+      animation-delay: -2s;
+    }
+
+    .node-4 {
+      bottom: 18%;
+      right: 27%;
+      animation-delay: -1.8s;
+    }
+
+    .hero-inner {
+      width: min(980px, 100%);
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(156, 231, 189, 0.6);
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 22px auto 0;
+      font-size: 4.8rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: 1.22rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      width: min(820px, 100%);
+      margin: 60px auto 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      text-align: left;
+    }
+
+    .metric {
+      min-height: 92px;
+      padding: 18px;
+      background: rgba(5, 6, 5, 0.76);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.18rem;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 4px;
+      color: var(--dim);
+      font-size: 0.9rem;
+    }
+
+    .page-section {
+      padding: 88px 22px;
+    }
+
+    .section-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      color: var(--green);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .section-title {
+      margin-top: 12px;
+      font-size: 3rem;
+      line-height: 1.06;
+      font-weight: 800;
+    }
+
+    .section-lede {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 560px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 230px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.14);
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-strong);
+      background: var(--panel-strong);
+    }
+
+    .icon-tile {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid rgba(159, 221, 224, 0.28);
+      border-radius: 8px;
+      background: rgba(159, 221, 224, 0.08);
+      color: var(--cyan);
+      font-weight: 800;
+    }
+
+    .card h3,
+    .solution-item h3,
+    .timeline-content h3 {
+      font-size: 1.22rem;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .card p,
+    .solution-item p,
+    .timeline-content p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 46px;
+      align-items: start;
+    }
+
+    .solution-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .solution-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .solution-index {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(241, 200, 106, 0.1);
+      color: var(--amber);
+      font-weight: 800;
+    }
+
+    .console-wrap {
+      position: relative;
+      min-height: 430px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(8, 10, 9, 0.8);
+      box-shadow: var(--shadow);
+    }
+
+    .console {
+      height: 100%;
+      min-height: 392px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #070907;
+    }
+
+    .console-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .console-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 16px rgba(156, 231, 189, 0.8);
+    }
+
+    .console-pill {
+      padding: 6px 9px;
+      border: 1px solid rgba(156, 231, 189, 0.26);
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 0.8rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .console-body {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 1px;
+      background: var(--line);
+    }
+
+    .run-list,
+    .run-panel {
+      padding: 18px;
+      background: #070907;
+    }
+
+    .run-row {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 58px;
+      border-bottom: 1px solid rgba(244, 246, 239, 0.08);
+    }
+
+    .run-row:last-child {
+      border-bottom: 0;
+    }
+
+    .run-check {
+      width: 18px;
+      height: 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(156, 231, 189, 0.16);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .run-name {
+      color: var(--text);
+      font-size: 0.94rem;
+      font-weight: 800;
+    }
+
+    .run-meta {
+      color: var(--dim);
+      font-size: 0.82rem;
+    }
+
+    .run-tag {
+      color: var(--cyan);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .panel-block {
+      margin-bottom: 16px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .panel-label {
+      color: var(--dim);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .panel-value {
+      margin-top: 8px;
+      color: var(--text);
+      font-size: 1.12rem;
+      font-weight: 800;
+    }
+
+    .approval {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid rgba(241, 200, 106, 0.28);
+      border-radius: var(--radius);
+      background: rgba(241, 200, 106, 0.08);
+    }
+
+    .approval strong {
+      display: block;
+      color: var(--amber);
+      font-size: 0.88rem;
+    }
+
+    .approval span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .approval button {
+      min-width: 84px;
+      min-height: 34px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--amber);
+      color: #181306;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 22px;
+      bottom: 22px;
+      left: 22px;
+      width: 1px;
+      background: linear-gradient(var(--green), rgba(244, 246, 239, 0.1));
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 18px;
+    }
+
+    .timeline-badge {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 900;
+    }
+
+    .timeline-content {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .quote {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote p {
+      color: var(--text);
+      font-size: 1.08rem;
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 32px;
+      color: var(--dim);
+      font-style: normal;
+      font-size: 0.92rem;
+    }
+
+    .portal-card,
+    .cta-card {
+      display: grid;
+      grid-template-columns: 1.1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(120deg, rgba(156, 231, 189, 0.08), rgba(159, 221, 224, 0.035) 50%, rgba(241, 200, 106, 0.06)),
+        rgba(255, 255, 255, 0.035);
+    }
+
+    .portal-card h2,
+    .cta-card h2 {
+      margin-top: 8px;
+      font-size: 2.3rem;
+      line-height: 1.08;
+    }
+
+    .portal-card p,
+    .cta-card p {
+      max-width: 570px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer {
+      padding: 42px 22px 54px;
+      border-top: 1px solid var(--line);
+      color: var(--dim);
+    }
+
+    .footer-inner {
+      width: min(1120px, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseNode {
+      0%,
+      100% {
+        transform: scale(1);
+        border-color: rgba(244, 246, 239, 0.18);
+      }
+      50% {
+        transform: scale(1.28);
+        border-color: rgba(156, 231, 189, 0.62);
+      }
+    }
+
+    @keyframes driftLine {
+      0%,
+      100% {
+        opacity: 0.36;
+      }
+      50% {
+        opacity: 0.88;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      h1 {
+        font-size: 3.7rem;
+      }
+
+      .section-header,
+      .split,
+      .portal-card,
+      .cta-card {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid,
+      .quote-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .console-body,
+      .trust-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cta-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-nav {
+        top: 12px;
+        width: calc(100% - 24px);
+        border-radius: 12px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(5, 6, 5, 0.96);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity 160ms var(--ease), transform 160ms var(--ease);
+      }
+
+      .nav-links[data-open="true"] {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        padding: 10px;
+      }
+
+      .nav-links .button {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: 86svh;
+        padding-top: 112px;
+      }
+
+      h1 {
+        font-size: 2.85rem;
+      }
+
+      .hero-copy {
+        font-size: 1.04rem;
+      }
+
+      .trust-strip,
+      .console-body {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        min-height: 78px;
+      }
+
+      .page-section {
+        padding: 64px 18px;
+      }
+
+      .section-title {
+        font-size: 2.24rem;
+      }
+
+      .section-header {
+        gap: 18px;
+      }
+
+      .solution-item {
+        grid-template-columns: 1fr;
+      }
+
+      .console-wrap {
+        padding: 10px;
+      }
+
+      .console-top,
+      .run-row {
+        align-items: start;
+      }
+
+      .run-row {
+        grid-template-columns: 22px 1fr;
+      }
+
+      .run-tag {
+        grid-column: 2;
+      }
+
+      .portal-card,
+      .cta-card {
+        padding: 24px;
+      }
+
+      .portal-card h2,
+      .cta-card h2 {
+        font-size: 1.9rem;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-nav" data-nav>
+    <a class="brand" href="#" aria-label="Cognitive Layer home">
+      <span class="brand-mark" aria-hidden="true">CL</span>
+      <span class="brand-name">cognitive layer</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
+      <span></span>
+    </button>
+
+    <nav class="nav-links" id="site-menu" data-open="false" aria-label="Primary navigation">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#process">Process</a>
+      <a href="#notes">Notes</a>
+      <a href="#portal">Portal</a>
+      <a class="button button-small button-primary" href="#call">Book a call</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-scene" aria-hidden="true">
+        <span class="scene-line line-1"></span>
+        <span class="scene-line line-2"></span>
+        <span class="scene-line line-3"></span>
+        <span class="scene-node node-1"></span>
+        <span class="scene-node node-2"></span>
+        <span class="scene-node node-3"></span>
+        <span class="scene-node node-4"></span>
+      </div>
+
+      <div class="hero-inner">
+        <span class="eyebrow">AI operators for modern teams</span>
+        <h1 id="hero-title">Cognitive Layer builds the agents your team can trust.</h1>
+        <p class="hero-copy">
+          We map repetitive work, ship dependable browser and desktop agents, and keep humans in control of the moments that matter.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#call">Book a call</a>
+          <a class="button" href="#capabilities">Explore capabilities</a>
+        </div>
+
+        <div class="trust-strip" aria-label="Cognitive Layer service highlights">
+          <div class="metric">
+            <strong>7 day pilot</strong>
+            <span>From workflow map to working operator.</span>
+          </div>
+          <div class="metric">
+            <strong>Human approval</strong>
+            <span>Guardrails for risky actions and edge cases.</span>
+          </div>
+          <div class="metric">
+            <strong>Live sessions</strong>
+            <span>Watch, pause, and inspect every run.</span>
+          </div>
+          <div class="metric">
+            <strong>Weekly tuning</strong>
+            <span>Small releases that compound quickly.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section reveal" id="capabilities">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Why Cognitive Layer</span>
+            <h2 class="section-title">Agents that fit into the work you already run.</h2>
+          </div>
+          <p class="section-lede">
+            We design operators around your tools, rules, and approval paths, then package the result so your team can run it without ceremony.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="icon-tile" aria-hidden="true">01</div>
+            <h3>Reusable playbooks</h3>
+            <p>Turn repeated clicks, uploads, lookups, and decisions into small blocks that can be recombined across teams.</p>
+          </article>
+          <article class="card">
+            <div class="icon-tile" aria-hidden="true">02</div>
+            <h3>Tool-native actions</h3>
+            <p>Operators work across CRMs, inboxes, help desks, spreadsheets, internal apps, and the awkward tools in between.</p>
+          </article>
+          <article class="card">
+            <div class="icon-tile" aria-hidden="true">03</div>
+            <h3>Observable control</h3>
+            <p>Approvals, logs, screenshots, and alerts make each run legible before automation touches sensitive steps.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section reveal" id="solutions">
+      <div class="section-inner split">
+        <div>
+          <span class="section-kicker">Solutions</span>
+          <h2 class="section-title">One layer for the slow parts of every operation.</h2>
+          <p class="section-lede">
+            Choose the first bottleneck. We build the agent, hand over the controls, and keep improving it as the workflow changes.
+          </p>
+        </div>
+
+        <div class="solution-list">
+          <article class="solution-item">
+            <div class="solution-index" aria-hidden="true">S</div>
+            <div>
+              <h3>Support operations</h3>
+              <p>Triage tickets, draft replies, search account history, and flag anything that needs a human call.</p>
+            </div>
+          </article>
+          <article class="solution-item">
+            <div class="solution-index" aria-hidden="true">R</div>
+            <div>
+              <h3>Revenue operations</h3>
+              <p>Enrich leads, update CRM fields, route follow-ups, and keep pipeline hygiene from becoming a weekly tax.</p>
+            </div>
+          </article>
+          <article class="solution-item">
+            <div class="solution-index" aria-hidden="true">F</div>
+            <div>
+              <h3>Finance and back office</h3>
+              <p>Reconcile records, prep filings, rename documents, chase missing data, and escalate exceptions cleanly.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section reveal" aria-labelledby="console-title">
+      <div class="section-inner split">
+        <div class="console-wrap" aria-label="Agent run console preview">
+          <div class="console">
+            <div class="console-top">
+              <div class="console-title">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Operator console</span>
+              </div>
+              <span class="console-pill">live run</span>
+            </div>
+
+            <div class="console-body">
+              <div class="run-list">
+                <div class="run-row">
+                  <span class="run-check" aria-hidden="true">1</span>
+                  <div>
+                    <div class="run-name">Open queue</div>
+                    <div class="run-meta">Help desk triage</div>
+                  </div>
+                  <span class="run-tag">done</span>
+                </div>
+                <div class="run-row">
+                  <span class="run-check" aria-hidden="true">2</span>
+                  <div>
+                    <div class="run-name">Read context</div>
+                    <div class="run-meta">CRM, billing, inbox</div>
+                  </div>
+                  <span class="run-tag">done</span>
+                </div>
+                <div class="run-row">
+                  <span class="run-check" aria-hidden="true">3</span>
+                  <div>
+                    <div class="run-name">Draft response</div>
+                    <div class="run-meta">Awaiting approval</div>
+                  </div>
+                  <span class="run-tag">hold</span>
+                </div>
+                <div class="run-row">
+                  <span class="run-check" aria-hidden="true">4</span>
+                  <div>
+                    <div class="run-name">Update account</div>
+                    <div class="run-meta">Runs after approval</div>
+                  </div>
+                  <span class="run-tag">next</span>
+                </div>
+              </div>
+
+              <aside class="run-panel">
+                <div class="panel-block">
+                  <div class="panel-label">Tasks cleared today</div>
+                  <div class="panel-value">148</div>
+                </div>
+                <div class="panel-block">
+                  <div class="panel-label">Median run time</div>
+                  <div class="panel-value">2m 14s</div>
+                </div>
+                <div class="approval">
+                  <div>
+                    <strong>Approval needed</strong>
+                    <span>Refund is above policy threshold.</span>
+                  </div>
+                  <button type="button">Review</button>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="section-kicker">Control room</span>
+          <h2 class="section-title" id="console-title">Reliable automation needs a clear cockpit.</h2>
+          <p class="section-lede">
+            Every operator ships with a runbook, approval policy, live session view, and release notes so the system stays understandable as it gets more capable.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section reveal" id="process">
+      <div class="section-inner split">
+        <div>
+          <span class="section-kicker">Process</span>
+          <h2 class="section-title">From workflow to production without the drama.</h2>
+          <p class="section-lede">
+            We keep the rollout small, visible, and useful from the first week, then expand from evidence instead of speculation.
+          </p>
+        </div>
+
+        <ol class="timeline">
+          <li class="timeline-item">
+            <div class="timeline-badge">01</div>
+            <div class="timeline-content">
+              <h3>Map the current path</h3>
+              <p>We watch the screens, files, decisions, and handoffs that make the workflow real.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-badge">02</div>
+            <div class="timeline-content">
+              <h3>Build a contained pilot</h3>
+              <p>A sandbox operator runs live-shaped tasks while your team tests the boundaries.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-badge">03</div>
+            <div class="timeline-content">
+              <h3>Launch with approvals</h3>
+              <p>Humans keep control over sensitive actions, exceptions, and quality checks.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-badge">04</div>
+            <div class="timeline-content">
+              <h3>Tune the layer weekly</h3>
+              <p>Run data shows where to tighten prompts, add tools, or expand the next playbook.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="page-section reveal" id="notes">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Operator notes</span>
+            <h2 class="section-title">Quiet wins compound fast.</h2>
+          </div>
+          <p class="section-lede">
+            The best agent work is not theatrical. It is the useful, repeatable work that disappears from the calendar.
+          </p>
+        </div>
+
+        <div class="quote-grid">
+          <article class="card quote">
+            <p>"The agent took a four-screen support workflow and made the handoff boring in the best way."</p>
+            <cite>Head of CX, B2B software team</cite>
+          </article>
+          <article class="card quote">
+            <p>"We finally have enrichment, CRM updates, and follow-up tasks happening before the weekly pipeline review."</p>
+            <cite>Revenue operations lead</cite>
+          </article>
+          <article class="card quote">
+            <p>"The approval trail matters. Our team can see what happened, why it happened, and where to step in."</p>
+            <cite>Operations director</cite>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section reveal" id="portal">
+      <div class="section-inner">
+        <div class="portal-card">
+          <div>
+            <span class="section-kicker">Client portal</span>
+            <h2>Already onboard?</h2>
+            <p>Open runbooks, dashboards, release notes, and support threads from the same place your operators are monitored.</p>
+          </div>
+          <a class="button" href="mailto:hello@cognitivelayer.agency">Email support</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section reveal" id="call">
+      <div class="section-inner">
+        <div class="cta-card">
+          <div>
+            <span class="section-kicker">Book a call</span>
+            <h2>Show us the workflow. We will build the first operator.</h2>
+            <p>Bring a screen recording, a messy SOP, or a workflow that only one person understands. We will turn it into a pilot plan.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="button button-primary" href="mailto:hello@cognitivelayer.agency?subject=Cognitive%20Layer%20intro">Schedule intro</a>
+            <a class="button" href="mailto:hello@cognitivelayer.agency">Talk to an expert</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand" aria-label="Cognitive Layer">
+        <span class="brand-mark" aria-hidden="true">CL</span>
+        <span class="brand-name">cognitive layer</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#process">Process</a>
+        <a href="#call">Book a call</a>
+      </nav>
+      <div>&copy; <span data-year></span> Cognitive Layer.</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector("[data-nav]");
+    const toggle = document.querySelector("[data-menu-toggle]");
+    const menu = document.querySelector("#site-menu");
+    const year = document.querySelector("[data-year]");
+
+    if (year) {
+      year.textContent = new Date().getFullYear();
+    }
+
+    if (toggle && menu) {
+      const setMenu = (open) => {
+        toggle.setAttribute("aria-expanded", String(open));
+        menu.dataset.open = String(open);
+      };
+
+      toggle.addEventListener("click", () => {
+        setMenu(toggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenu(false));
+      });
+    }
+
+    if (nav) {
+      const syncNav = () => {
+        nav.classList.toggle("is-scrolled", window.scrollY > 24);
+      };
+      syncNav();
+      window.addEventListener("scroll", syncNav, { passive: true });
+    }
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: "0px 0px -70px 0px",
+        threshold: 0.12
+      });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>
