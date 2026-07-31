@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9ce7bd" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#9fdde0" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#050605"/>
+  <rect x="3" y="3" width="58" height="58" rx="12" fill="url(#tile)" stroke="#9ce7bd" stroke-opacity="0.6" stroke-width="2"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#9ce7bd">CL</text>
+</svg>
