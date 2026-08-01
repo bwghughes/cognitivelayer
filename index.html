@@ -9,6 +9,8 @@
     content="Cognitive Layer designs and ships reliable AI operators for support, revenue, finance, and back-office teams, with human approvals, live run views, and weekly tuning."
   >
   <link rel="canonical" href="https://cognitive-layer.com/">
+  <link rel="alternate" hreflang="en" href="https://cognitive-layer.com/">
+  <link rel="alternate" hreflang="x-default" href="https://cognitive-layer.com/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Cognitive Layer">
   <meta name="theme-color" content="#050605">
@@ -18,6 +20,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Cognitive Layer">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Cognitive Layer | AI Operators for Modern Teams">
   <meta
     property="og:description"
@@ -70,6 +73,78 @@
           "url": "https://cognitive-layer.com/",
           "parentOrganization": { "@id": "https://cognitive-layer.com/#organization" },
           "description": "Custom AI operators that automate repetitive work across support, revenue, finance, and back-office workflows, with human-in-the-loop approvals and observable runs."
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://cognitive-layer.com/#webpage",
+          "url": "https://cognitive-layer.com/",
+          "name": "Cognitive Layer | AI Operators for Modern Teams",
+          "isPartOf": { "@id": "https://cognitive-layer.com/#website" },
+          "about": { "@id": "https://cognitive-layer.com/#organization" },
+          "description": "Cognitive Layer designs and ships reliable AI operators for support, revenue, finance, and back-office teams, with human approvals, live run views, and weekly tuning.",
+          "inLanguage": "en",
+          "datePublished": "2025-07-31",
+          "dateModified": "2026-08-01",
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://cognitive-layer.com/og-image.png",
+            "width": 1200,
+            "height": 630
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://cognitive-layer.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an AI operator?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An AI operator is a purpose-built agent that runs a specific workflow end to end: reading context across your tools, taking tool-native actions, and pausing for human approval on the steps that carry risk."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which teams does Cognitive Layer work with?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We build operators for support, revenue, finance, and back-office teams — anywhere repetitive, tool-heavy work eats hours that should go to judgement calls."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does it take to get an operator running?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A contained pilot ships in seven days. We map the current workflow, build a sandbox operator against live-shaped tasks, and launch with approvals before expanding from real run data."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which tools can an operator work across?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Operators work across CRMs, inboxes, help desks, spreadsheets, billing systems, and internal apps — including the awkward tools that have no API. If your team can do it in a browser or desktop app, an operator can usually run it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do humans stay in control of sensitive actions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Every operator ships with an approval policy: refunds above threshold, external sends, and exceptions route to a human. Runs are logged with screenshots so your team can inspect exactly what happened and why."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens after the pilot launches?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We tune the layer weekly. Run data shows where to tighten prompts, add tools, or expand the next playbook, so the operator compounds in value instead of drifting out of date."
+              }
+            }
+          ]
         }
       ]
     }
@@ -819,6 +894,66 @@
       font-size: 0.92rem;
     }
 
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      max-width: 860px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.035);
+      transition: border-color 180ms var(--ease), background 180ms var(--ease);
+    }
+
+    .faq-item[open] {
+      border-color: var(--line-strong);
+      background: var(--panel-strong);
+    }
+
+    .faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      flex-shrink: 0;
+      color: var(--green);
+      font-size: 1.3rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .faq-item[open] summary::after {
+      content: "\2013";
+    }
+
+    .faq-item summary:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: -2px;
+      border-radius: var(--radius);
+    }
+
+    .faq-item p {
+      padding: 0 24px 22px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 720px;
+    }
+
     .portal-card,
     .cta-card {
       display: grid;
@@ -1077,9 +1212,9 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
   <header class="site-nav" data-nav>
-    <a class="brand" href="#" aria-label="Cognitive Layer home">
+    <a class="brand" href="#top" aria-label="Cognitive Layer home">
       <span class="brand-mark" aria-hidden="true">CL</span>
       <span class="brand-name">cognitive layer</span>
     </a>
@@ -1093,6 +1228,7 @@
       <a href="#solutions">Solutions</a>
       <a href="#process">Process</a>
       <a href="#notes">Notes</a>
+      <a href="#faq">FAQ</a>
       <a href="#portal">Portal</a>
       <a class="button button-small button-primary" href="#call">Book a call</a>
     </nav>
@@ -1361,6 +1497,47 @@
       </div>
     </section>
 
+    <section class="page-section reveal" id="faq">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">FAQ</span>
+            <h2 class="section-title">Questions teams ask before the first run.</h2>
+          </div>
+          <p class="section-lede">
+            Straight answers on what an AI operator is, how fast a pilot ships, and how much control your team keeps.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>What is an AI operator?</summary>
+            <p>An AI operator is a purpose-built agent that runs a specific workflow end to end: reading context across your tools, taking tool-native actions, and pausing for human approval on the steps that carry risk.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Which teams does Cognitive Layer work with?</summary>
+            <p>We build operators for support, revenue, finance, and back-office teams — anywhere repetitive, tool-heavy work eats hours that should go to judgement calls.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How long does it take to get an operator running?</summary>
+            <p>A contained pilot ships in seven days. We map the current workflow, build a sandbox operator against live-shaped tasks, and launch with approvals before expanding from real run data.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Which tools can an operator work across?</summary>
+            <p>Operators work across CRMs, inboxes, help desks, spreadsheets, billing systems, and internal apps — including the awkward tools that have no API. If your team can do it in a browser or desktop app, an operator can usually run it.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do humans stay in control of sensitive actions?</summary>
+            <p>Yes. Every operator ships with an approval policy: refunds above threshold, external sends, and exceptions route to a human. Runs are logged with screenshots so your team can inspect exactly what happened and why.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What happens after the pilot launches?</summary>
+            <p>We tune the layer weekly. Run data shows where to tighten prompts, add tools, or expand the next playbook, so the operator compounds in value instead of drifting out of date.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="page-section reveal" id="portal">
       <div class="section-inner">
         <div class="portal-card">
@@ -1401,6 +1578,7 @@
         <a href="#capabilities">Capabilities</a>
         <a href="#solutions">Solutions</a>
         <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
         <a href="#call">Book a call</a>
       </nav>
       <div>&copy; <span data-year></span> Cognitive Layer.</div>
