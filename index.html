@@ -164,6 +164,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 80px;
     }
 
     body {
@@ -592,77 +593,7 @@
 
     .layer-engine {
       position: absolute;
-      inset: 36px 20px 72px;
-    }
-
-    .layer {
-      position: absolute;
-      left: 12%;
-      right: 12%;
-      height: 42%;
-      border: 1px solid rgba(244, 241, 234, 0.16);
-      background: linear-gradient(135deg, rgba(43, 42, 239, 0.45), rgba(126, 232, 238, 0.12));
-      clip-path: polygon(8% 18%, 92% 0, 100% 78%, 0 100%);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-      animation: fold 7s var(--ease) infinite;
-    }
-
-    .layer-2 {
-      top: 16%;
-      left: 18%;
-      right: 8%;
-      background: linear-gradient(135deg, rgba(126, 232, 238, 0.2), rgba(43, 42, 239, 0.32));
-      animation-delay: -1.6s;
-    }
-
-    .layer-3 {
-      top: 32%;
-      left: 8%;
-      right: 18%;
-      background: linear-gradient(135deg, rgba(227, 154, 214, 0.16), rgba(43, 42, 239, 0.38));
-      animation-delay: -3.2s;
-    }
-
-    .layer-4 {
-      top: 48%;
-      left: 14%;
-      right: 14%;
-      background: linear-gradient(135deg, rgba(200, 242, 90, 0.18), rgba(43, 42, 239, 0.22));
-      animation-delay: -4.8s;
-    }
-
-    .crosshair {
-      position: absolute;
-      top: 46%;
-      left: 50%;
-      z-index: 2;
-      width: 54px;
-      height: 54px;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
-    .crosshair::before,
-    .crosshair::after {
-      content: "";
-      position: absolute;
-      background: rgba(200, 242, 90, 0.85);
-    }
-
-    .crosshair::before {
-      left: 50%;
-      top: 8px;
-      bottom: 8px;
-      width: 1px;
-      transform: translateX(-50%);
-    }
-
-    .crosshair::after {
-      top: 50%;
-      left: 8px;
-      right: 8px;
-      height: 1px;
-      transform: translateY(-50%);
+      inset: 0;
     }
 
     .scan {
@@ -683,13 +614,32 @@
       z-index: 3;
       display: flex;
       justify-content: space-between;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 8px 12px;
       color: rgba(244, 241, 234, 0.62);
       font-family: var(--font-mono);
       font-size: 0.64rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
+
+    .layer-svg {
+      position: absolute;
+      inset: 42px 18px 58px;
+      width: calc(100% - 36px);
+      height: calc(100% - 100px);
+      overflow: visible;
+    }
+
+    .layer-svg .sheet {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: fold 7s var(--ease) infinite;
+    }
+
+    .layer-svg .sheet-b { animation-delay: -1.6s; }
+    .layer-svg .sheet-c { animation-delay: -3.2s; }
+    .layer-svg .sheet-d { animation-delay: -4.8s; }
 
     .ticker {
       overflow: hidden;
@@ -1124,13 +1074,14 @@
 
       .hero {
         min-height: 0;
-        padding-top: 36px;
+        padding-top: 28px;
+        padding-bottom: 40px;
         gap: 32px;
       }
 
       .viewport,
       .viewport-inner {
-        min-height: 420px;
+        min-height: 360px;
       }
     }
 
@@ -1194,6 +1145,15 @@
         font-size: 1.05rem;
       }
 
+      h1 {
+        font-size: clamp(2.35rem, 12vw, 3.2rem);
+      }
+
+      .viewport,
+      .viewport-inner {
+        min-height: 300px;
+      }
+
       .page-section {
         padding: 64px var(--gutter);
       }
@@ -1230,7 +1190,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div>
         <p class="kicker">Operational AI · Human in the loop</p>
-        <h1 id="hero-title">We solve your <em>biggest problems</em> with AI.</h1>
+        <h1 id="hero-title">We solve your<br><em>biggest problems</em><br>with AI.</h1>
         <p class="hero-copy">
           Tell us what is slowing the business down. We build AI that removes it — reliably, with your team still in control.
         </p>
@@ -1259,11 +1219,41 @@
           <div class="viewport-label">Layer stack · live</div>
           <div class="viewport-status"><span class="live-dot"></span> Sealed</div>
           <div class="layer-engine">
-            <div class="layer layer-1"></div>
-            <div class="layer layer-2"></div>
-            <div class="layer layer-3"></div>
-            <div class="layer layer-4"></div>
-            <div class="crosshair"></div>
+            <svg class="layer-svg" viewBox="0 0 480 420" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="sheetA" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#3d3ae8" stop-opacity="0.82"/>
+                  <stop offset="100%" stop-color="#7ee8ee" stop-opacity="0.22"/>
+                </linearGradient>
+                <linearGradient id="sheetB" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#7ee8ee" stop-opacity="0.38"/>
+                  <stop offset="100%" stop-color="#2b2aef" stop-opacity="0.45"/>
+                </linearGradient>
+                <linearGradient id="sheetC" x1="0" y1="1" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#e39ad6" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#3d3ae8" stop-opacity="0.5"/>
+                </linearGradient>
+                <linearGradient id="sheetD" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#c8f25a" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#2b2aef" stop-opacity="0.32"/>
+                </linearGradient>
+              </defs>
+              <g class="sheet sheet-a">
+                <polygon points="48,150 430,78 468,248 28,328" fill="url(#sheetA)" stroke="rgba(244,241,234,0.28)" stroke-width="1.2"/>
+              </g>
+              <g class="sheet sheet-b">
+                <polygon points="70,178 412,112 452,268 52,342" fill="url(#sheetB)" stroke="rgba(244,241,234,0.22)" stroke-width="1.2"/>
+              </g>
+              <g class="sheet sheet-c">
+                <polygon points="36,208 438,148 470,302 22,368" fill="url(#sheetC)" stroke="rgba(244,241,234,0.2)" stroke-width="1.2"/>
+              </g>
+              <g class="sheet sheet-d">
+                <polygon points="58,236 420,182 456,332 44,392" fill="url(#sheetD)" stroke="rgba(200,242,90,0.35)" stroke-width="1.2"/>
+              </g>
+              <line x1="240" y1="168" x2="240" y2="292" stroke="#c8f25a" stroke-opacity="0.85" stroke-width="1"/>
+              <line x1="178" y1="230" x2="302" y2="230" stroke="#c8f25a" stroke-opacity="0.85" stroke-width="1"/>
+              <circle cx="240" cy="230" r="5" fill="none" stroke="#c8f25a" stroke-width="1.2"/>
+            </svg>
           </div>
           <div class="scan"></div>
           <div class="viewport-footer">
