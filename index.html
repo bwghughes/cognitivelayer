@@ -13,8 +13,9 @@
   <link rel="alternate" hreflang="x-default" href="https://cognitive-layer.com/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Cognitive Layer">
-  <meta name="theme-color" content="#050605">
+  <meta name="theme-color" content="#FFFFFF">
 
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -43,7 +44,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
     {
@@ -56,9 +57,9 @@
           "url": "https://cognitive-layer.com/",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://cognitive-layer.com/apple-touch-icon.png",
-            "width": 180,
-            "height": 180
+            "url": "https://cognitive-layer.com/assets/logo-horizontal.png",
+            "width": 738,
+            "height": 112
           },
           "description": "Cognitive Layer solves the biggest problems holding businesses back using AI.",
           "email": "hello@cognitive-layer.com"
@@ -88,7 +89,7 @@
           "description": "Cognitive Layer uses AI to solve the biggest problems holding your business back.",
           "inLanguage": "en",
           "datePublished": "2025-07-31",
-          "dateModified": "2026-09-01",
+          "dateModified": "2026-09-17",
           "primaryImageOfPage": {
             "@type": "ImageObject",
             "url": "https://cognitive-layer.com/og-image.png",
@@ -131,18 +132,28 @@
   </script>
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #050605;
-      --text: #f4f6ef;
-      --muted: rgba(244, 246, 239, 0.7);
-      --dim: rgba(244, 246, 239, 0.48);
-      --line: rgba(232, 235, 226, 0.12);
-      --line-strong: rgba(232, 235, 226, 0.22);
-      --green: #9ce7bd;
-      --ink: #09100c;
+      color-scheme: light;
+      --ink: #101C32;
+      --cobalt: #3155D9;
+      --layer-blue: #537DF5;
+      --signal-mint: #62D8CC;
+      --white: #FFFFFF;
+      --bg: var(--white);
+      --text: var(--ink);
+      --muted: rgba(16, 28, 50, 0.68);
+      --dim: rgba(16, 28, 50, 0.42);
+      --line: rgba(16, 28, 50, 0.12);
+      --line-strong: rgba(16, 28, 50, 0.22);
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
-      --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+      --font: "Inter", Arial, Helvetica, sans-serif;
+      --text-display: clamp(3rem, 6.4vw, 4rem);
+      --leading-display: 1.1;
+      --text-heading: clamp(1.5rem, 2.6vw, 2rem);
+      --leading-heading: 1.2;
+      --text-body: clamp(1rem, 1.15vw, 1.125rem);
+      --leading-body: 1.5;
+      --text-label: 0.8125rem;
+      --leading-label: 1.4;
     }
 
     * {
@@ -156,40 +167,15 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(ellipse 90% 55% at 50% -10%, rgba(156, 231, 189, 0.16), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 100% 20%, rgba(159, 221, 224, 0.08), transparent 50%),
-        radial-gradient(ellipse 40% 35% at 0% 60%, rgba(241, 200, 106, 0.06), transparent 45%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: var(--font-sans);
-      line-height: 1.55;
+      font-family: var(--font);
+      font-size: var(--text-body);
+      font-weight: 400;
+      line-height: var(--leading-body);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background-image:
-        linear-gradient(rgba(244, 246, 239, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(244, 246, 239, 0.03) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: linear-gradient(to bottom, black, transparent 80%);
-      pointer-events: none;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      pointer-events: none;
     }
 
     a {
@@ -209,79 +195,62 @@
     }
 
     .site-nav {
-      position: fixed;
-      top: 20px;
-      left: 50%;
+      position: sticky;
+      top: 0;
       z-index: 30;
-      width: min(920px, calc(100% - 32px));
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 10px 12px 10px 16px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(5, 6, 5, 0.72);
-      box-shadow: 0 12px 42px rgba(0, 0, 0, 0.24);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      transform: translateX(-50%);
-      transition: background 180ms var(--ease), border-color 180ms var(--ease);
+      gap: 24px;
+      padding: 22px 32px;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid transparent;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .site-nav.is-scrolled {
-      background: rgba(5, 6, 5, 0.92);
-      border-color: var(--line-strong);
+      border-bottom-color: var(--line);
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 700;
+      flex-shrink: 0;
     }
 
-    .brand-mark {
-      width: 30px;
-      height: 30px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(156, 231, 189, 0.45);
-      border-radius: 8px;
-      background:
-        linear-gradient(145deg, rgba(156, 231, 189, 0.25), rgba(159, 221, 224, 0.08)),
-        rgba(255, 255, 255, 0.03);
-      color: var(--green);
-      font-size: 0.72rem;
-      font-weight: 700;
-      line-height: 1;
+    .brand-lockup {
+      display: block;
+      width: clamp(180px, 32vw, 236px);
+      height: auto;
     }
 
-    .brand-name {
-      font-size: 0.98rem;
-      letter-spacing: -0.02em;
+    .brand-lockup-footer {
+      width: clamp(180px, 40vw, 200px);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 28px;
     }
 
     .nav-links a {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: var(--text-label);
       font-weight: 500;
+      line-height: var(--leading-label);
+      letter-spacing: 0.01em;
       transition: color 160ms var(--ease);
     }
 
     .nav-links a:hover,
     .nav-links a:focus-visible {
-      color: var(--text);
+      color: var(--ink);
     }
 
     .nav-links .button-primary {
-      color: var(--ink);
+      color: var(--white);
     }
 
     .nav-toggle {
@@ -289,9 +258,9 @@
       width: 42px;
       height: 42px;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
+      border-radius: 2px;
+      background: var(--white);
+      color: var(--ink);
       cursor: pointer;
     }
 
@@ -300,11 +269,10 @@
     .nav-toggle::after {
       content: "";
       display: block;
-      width: 18px;
-      height: 2px;
+      width: 16px;
+      height: 1.5px;
       margin: 4px auto;
       background: currentColor;
-      border-radius: 999px;
     }
 
     .button {
@@ -313,149 +281,105 @@
       justify-content: center;
       min-height: 48px;
       padding: 12px 20px;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      color: var(--text);
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: transform 160ms var(--ease), background 160ms var(--ease), border-color 160ms var(--ease);
+      border: 1px solid var(--ink);
+      border-radius: 2px;
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.9375rem;
+      line-height: 1.4;
+      transition: transform 160ms var(--ease), background 160ms var(--ease), border-color 160ms var(--ease), color 160ms var(--ease);
     }
 
     .button:hover,
     .button:focus-visible {
-      transform: translateY(-2px);
-      border-color: rgba(244, 246, 239, 0.36);
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--ink);
+      color: var(--white);
     }
 
     .button-primary {
-      border-color: transparent;
-      background: var(--text);
-      color: var(--ink);
+      border-color: var(--cobalt);
+      background: var(--cobalt);
+      color: var(--white);
     }
 
     .button-primary:hover,
     .button-primary:focus-visible {
-      background: #ffffff;
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
     }
 
     .button-small {
-      min-height: 38px;
-      padding: 8px 14px;
-      font-size: 0.88rem;
+      min-height: 40px;
+      padding: 8px 16px;
+      font-size: var(--text-label);
+    }
+
+    .button-on-ink {
+      border-color: rgba(255, 255, 255, 0.28);
+      color: var(--white);
+    }
+
+    .button-on-ink:hover,
+    .button-on-ink:focus-visible {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--ink);
     }
 
     .hero {
       position: relative;
-      min-height: 100svh;
+      min-height: calc(100svh - 88px);
       display: grid;
-      place-items: center;
-      overflow: hidden;
-      padding: 140px 22px 72px;
-    }
-
-    .hero-scene {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 60vw;
-      height: 60vw;
-      max-width: 720px;
-      max-height: 720px;
-      top: 50%;
-      left: 50%;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(156, 231, 189, 0.14), transparent 68%);
-      transform: translate(-50%, -50%);
-      animation: glowPulse 7s ease-in-out infinite;
-    }
-
-    .scene-line {
-      position: absolute;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(156, 231, 189, 0.4), transparent);
-      animation: driftLine 10s var(--ease) infinite;
-    }
-
-    .scene-line.line-1 {
-      top: 28%;
-      left: -10%;
-      width: 55%;
-      transform: rotate(7deg);
-    }
-
-    .scene-line.line-2 {
-      bottom: 30%;
-      right: -8%;
-      width: 50%;
-      transform: rotate(-9deg);
-      animation-delay: -4s;
+      align-items: center;
+      padding: 72px 32px 96px;
     }
 
     .hero-inner {
-      width: min(860px, 100%);
-      text-align: center;
+      width: min(760px, 100%);
     }
 
-    .hero-brand {
-      display: inline-block;
-      margin-bottom: 28px;
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      color: var(--text);
-      opacity: 0;
-      animation: riseIn 0.9s var(--ease) 0.05s forwards;
+    .hero-mark {
+      display: block;
+      width: 64px;
+      height: auto;
+      margin-bottom: 36px;
     }
 
-    .hero-brand em {
-      font-style: italic;
-      color: var(--green);
+    .hero-kicker {
+      display: block;
+      margin-bottom: 20px;
+      color: var(--cobalt);
+      font-size: var(--text-label);
+      font-weight: 500;
+      line-height: var(--leading-label);
+      letter-spacing: 0.04em;
     }
 
     h1 {
-      max-width: 820px;
-      margin: 0 auto;
-      font-family: var(--font-display);
-      font-size: clamp(2.6rem, 7vw, 4.6rem);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      opacity: 0;
-      animation: riseIn 0.9s var(--ease) 0.18s forwards;
+      font-size: var(--text-display);
+      font-weight: 500;
+      line-height: var(--leading-display);
+      letter-spacing: -0.03em;
     }
 
     .hero-copy {
       max-width: 540px;
-      margin: 24px auto 0;
+      margin-top: 24px;
       color: var(--muted);
-      font-size: 1.15rem;
-      font-weight: 400;
-      opacity: 0;
-      animation: riseIn 0.9s var(--ease) 0.32s forwards;
+      font-size: var(--text-body);
     }
 
     .hero-actions {
       display: flex;
       align-items: center;
-      justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 36px;
-      opacity: 0;
-      animation: riseIn 0.9s var(--ease) 0.46s forwards;
     }
 
     .page-section {
-      padding: 96px 22px;
+      padding: 96px 32px;
     }
 
     .section-inner {
@@ -465,27 +389,26 @@
 
     .section-kicker {
       display: block;
-      color: var(--green);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      color: var(--cobalt);
+      font-size: var(--text-label);
+      font-weight: 500;
+      line-height: var(--leading-label);
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     .section-title {
       margin-top: 14px;
-      font-family: var(--font-display);
-      font-size: clamp(2.1rem, 4.5vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1.08;
+      font-size: var(--text-heading);
+      font-weight: 500;
+      line-height: var(--leading-heading);
       letter-spacing: -0.02em;
     }
 
     .section-lede {
       margin-top: 16px;
-      max-width: 520px;
+      max-width: 540px;
       color: var(--muted);
-      font-size: 1.05rem;
     }
 
     .problems {
@@ -516,71 +439,65 @@
 
     .problem-num {
       color: var(--dim);
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-size: var(--text-label);
+      font-weight: 500;
+      letter-spacing: 0.06em;
     }
 
     .problem-item h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
+      font-size: var(--text-heading);
+      font-weight: 500;
+      line-height: var(--leading-heading);
+      letter-spacing: -0.02em;
     }
 
     .problem-item p {
       margin-top: 10px;
       max-width: 560px;
       color: var(--muted);
-      font-size: 1rem;
     }
 
     .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 40px;
       margin-top: 48px;
     }
 
     .step h3 {
       margin-top: 12px;
-      font-family: var(--font-display);
-      font-size: 1.55rem;
-      font-weight: 400;
-      letter-spacing: -0.01em;
+      font-size: var(--text-heading);
+      font-weight: 500;
+      line-height: var(--leading-heading);
+      letter-spacing: -0.02em;
     }
 
     .step p {
       margin-top: 10px;
       color: var(--muted);
-      font-size: 0.98rem;
     }
 
     .step-num {
-      color: var(--green);
-      font-size: 0.85rem;
-      font-weight: 600;
+      color: var(--cobalt);
+      font-size: var(--text-label);
+      font-weight: 500;
       letter-spacing: 0.06em;
     }
 
     .faq-list {
       display: grid;
-      gap: 10px;
+      gap: 0;
       margin-top: 40px;
       max-width: 720px;
     }
 
     .faq-item {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.03);
-      transition: border-color 180ms var(--ease), background 180ms var(--ease);
+      border-top: 1px solid var(--line);
+      background: transparent;
     }
 
-    .faq-item[open] {
-      border-color: var(--line-strong);
-      background: rgba(255, 255, 255, 0.05);
+    .faq-item:last-child {
+      border-bottom: 1px solid var(--line);
     }
 
     .faq-item summary {
@@ -588,9 +505,9 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 18px 22px;
-      font-size: 1.02rem;
-      font-weight: 600;
+      padding: 20px 0;
+      font-size: 1.0625rem;
+      font-weight: 500;
       cursor: pointer;
       list-style: none;
     }
@@ -602,9 +519,9 @@
     .faq-item summary::after {
       content: "+";
       flex-shrink: 0;
-      color: var(--green);
+      color: var(--cobalt);
       font-size: 1.25rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1;
     }
 
@@ -613,63 +530,57 @@
     }
 
     .faq-item summary:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: -2px;
-      border-radius: 8px;
+      outline: 2px solid var(--cobalt);
+      outline-offset: 4px;
     }
 
     .faq-item p {
-      padding: 0 22px 20px;
+      padding: 0 0 22px;
       color: var(--muted);
-      font-size: 0.96rem;
       max-width: 640px;
     }
 
     .cta-band {
-      padding: 48px 22px 112px;
+      padding: 96px 32px;
+      background: var(--ink);
+      color: var(--white);
     }
 
     .cta-card {
       width: min(920px, 100%);
       margin: 0 auto;
-      padding: 48px 40px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background:
-        linear-gradient(135deg, rgba(156, 231, 189, 0.1), transparent 45%),
-        linear-gradient(225deg, rgba(159, 221, 224, 0.06), transparent 40%),
-        rgba(255, 255, 255, 0.03);
-      text-align: center;
+    }
+
+    .cta-band .section-kicker {
+      color: var(--signal-mint);
     }
 
     .cta-card h2 {
-      margin-top: 12px;
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      margin-top: 14px;
+      font-size: var(--text-display);
+      font-weight: 500;
+      line-height: var(--leading-display);
+      letter-spacing: -0.03em;
     }
 
     .cta-card p {
-      max-width: 480px;
-      margin: 14px auto 0;
-      color: var(--muted);
-      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, 0.72);
     }
 
     .cta-actions {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 28px;
+      margin-top: 32px;
     }
 
     .footer {
-      padding: 36px 22px 48px;
-      border-top: 1px solid var(--line);
-      color: var(--dim);
+      padding: 36px 32px 48px;
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.48);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .footer-inner {
@@ -688,57 +599,26 @@
     }
 
     .footer-links a {
-      color: var(--muted);
-      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: var(--text-label);
+      font-weight: 500;
+      line-height: var(--leading-label);
     }
 
     .footer-links a:hover,
     .footer-links a:focus-visible {
-      color: var(--text);
+      color: var(--white);
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(16px);
       transition: opacity 600ms var(--ease), transform 600ms var(--ease);
     }
 
     .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    @keyframes riseIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes glowPulse {
-      0%,
-      100% {
-        opacity: 0.55;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.08);
-      }
-    }
-
-    @keyframes driftLine {
-      0%,
-      100% {
-        opacity: 0.3;
-      }
-      50% {
-        opacity: 0.85;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -751,12 +631,9 @@
         transition-duration: 1ms !important;
       }
 
-      .hero-brand,
-      h1,
-      .hero-copy,
-      .hero-actions {
+      .reveal {
         opacity: 1;
-        animation: none;
+        transform: none;
       }
     }
 
@@ -769,9 +646,7 @@
 
     @media (max-width: 760px) {
       .site-nav {
-        top: 12px;
-        width: calc(100% - 24px);
-        border-radius: 12px;
+        padding: 16px 18px;
       }
 
       .nav-toggle {
@@ -780,18 +655,16 @@
 
       .nav-links {
         position: absolute;
-        top: calc(100% + 8px);
+        top: 100%;
         left: 0;
         right: 0;
         display: grid;
-        gap: 6px;
-        padding: 12px;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        background: rgba(5, 6, 5, 0.96);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        gap: 4px;
+        padding: 12px 18px 18px;
+        border-bottom: 1px solid var(--line);
+        background: var(--white);
         opacity: 0;
-        transform: translateY(-8px);
+        transform: translateY(-6px);
         pointer-events: none;
         transition: opacity 160ms var(--ease), transform 160ms var(--ease);
       }
@@ -803,15 +676,22 @@
       }
 
       .nav-links a {
-        padding: 10px;
+        padding: 10px 0;
       }
 
       .nav-links .button {
         width: 100%;
+        margin-top: 8px;
       }
 
       .hero {
-        padding: 120px 18px 56px;
+        min-height: 0;
+        padding: 56px 18px 72px;
+      }
+
+      .page-section,
+      .cta-band {
+        padding: 72px 18px;
       }
 
       .problem-item {
@@ -820,16 +700,12 @@
         padding: 24px 0;
       }
 
-      .page-section {
-        padding: 72px 18px;
+      .cta-card h2 {
+        font-size: clamp(2.25rem, 10vw, 3rem);
       }
 
-      .cta-card {
-        padding: 36px 22px;
-      }
-
-      .cta-band {
-        padding: 24px 18px 88px;
+      .footer {
+        padding: 28px 18px 40px;
       }
 
       .footer-inner {
@@ -841,9 +717,14 @@
 </head>
 <body id="top">
   <header class="site-nav" data-nav>
-    <a class="brand" href="#top" aria-label="Cognitive Layer home">
-      <span class="brand-mark" aria-hidden="true">CL</span>
-      <span class="brand-name">cognitive layer</span>
+    <a class="brand" href="#top">
+      <img
+        class="brand-lockup"
+        src="/assets/logo-horizontal.svg"
+        alt="Cognitive Layer"
+        width="236"
+        height="58"
+      >
     </a>
 
     <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
@@ -860,14 +741,15 @@
 
   <main>
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-scene" aria-hidden="true">
-        <div class="hero-glow"></div>
-        <span class="scene-line line-1"></span>
-        <span class="scene-line line-2"></span>
-      </div>
-
       <div class="hero-inner">
-        <p class="hero-brand">Cognitive <em>Layer</em></p>
+        <img
+          class="hero-mark"
+          src="/assets/logo-icon-color.svg"
+          alt=""
+          width="64"
+          height="41"
+        >
+        <p class="hero-kicker">Intelligence, in layers.</p>
         <h1 id="hero-title">We solve your biggest problems with AI.</h1>
         <p class="hero-copy">
           Tell us what is slowing the business down. We build AI that removes it — reliably, with your team still in control.
@@ -977,7 +859,7 @@
         <p>We will show you how AI clears it — and what a seven-day pilot looks like for your team.</p>
         <div class="cta-actions">
           <a class="button button-primary" href="mailto:hello@cognitive-layer.com?subject=Cognitive%20Layer%20intro">Schedule intro</a>
-          <a class="button" href="mailto:hello@cognitive-layer.com">Email us</a>
+          <a class="button button-on-ink" href="mailto:hello@cognitive-layer.com">Email us</a>
         </div>
       </div>
     </section>
@@ -985,10 +867,15 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <div class="brand" aria-label="Cognitive Layer">
-        <span class="brand-mark" aria-hidden="true">CL</span>
-        <span class="brand-name">cognitive layer</span>
-      </div>
+      <a class="brand" href="#top">
+        <img
+          class="brand-lockup brand-lockup-footer"
+          src="/assets/logo-horizontal-white.svg"
+          alt="Cognitive Layer"
+          width="200"
+          height="49"
+        >
+      </a>
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="#problems">Problems</a>
         <a href="#how">How it works</a>
