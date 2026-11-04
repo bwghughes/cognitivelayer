@@ -484,6 +484,70 @@
       letter-spacing: 0.06em;
     }
 
+    .case-list {
+      margin-top: 48px;
+    }
+
+    .case-card {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .case-card:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-offering {
+      color: var(--cobalt);
+      font-size: var(--text-label);
+      font-weight: 500;
+      line-height: var(--leading-label);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .case-card h3 {
+      margin-top: 8px;
+      font-size: var(--text-heading);
+      font-weight: 500;
+      line-height: var(--leading-heading);
+      letter-spacing: -0.02em;
+    }
+
+    .case-persona {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: var(--text-label);
+      font-weight: 500;
+      line-height: var(--leading-label);
+    }
+
+    .case-parts {
+      display: grid;
+      gap: 16px;
+      margin: 22px 0 0;
+    }
+
+    .case-part {
+      display: grid;
+      grid-template-columns: 148px 1fr;
+      gap: 20px;
+      align-items: baseline;
+    }
+
+    .case-part dt {
+      margin: 0;
+      color: var(--ink);
+      font-size: var(--text-label);
+      font-weight: 600;
+      line-height: var(--leading-label);
+    }
+
+    .case-part dd {
+      margin: 0;
+      color: var(--muted);
+    }
+
     .faq-list {
       display: grid;
       gap: 0;
@@ -642,6 +706,11 @@
         grid-template-columns: 1fr;
         gap: 28px;
       }
+
+      .case-part {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
     }
 
     @media (max-width: 760px) {
@@ -734,6 +803,7 @@
     <nav class="nav-links" id="site-menu" data-open="false" aria-label="Primary navigation">
       <a href="#problems">Problems</a>
       <a href="#how">How it works</a>
+      <a href="#cases">Case studies</a>
       <a href="#faq">FAQ</a>
       <a class="button button-small button-primary" href="#call">Book a call</a>
     </nav>
@@ -830,6 +900,121 @@
       </div>
     </section>
 
+    <section class="page-section reveal" id="cases" aria-labelledby="cases-title">
+      <div class="section-inner">
+        <span class="section-kicker">Case studies</span>
+        <h2 class="section-title" id="cases-title">What the work looks like.</h2>
+
+        <!-- PLACEHOLDER case studies (fictitious, to be replaced). Customers are invented and identified only by a first name, role, and town. Swap this block for real stories. -->
+        <p class="section-lede">
+          Five short accounts. Each one is a small AI workflow on the team's own Macs, with a person still approving anything that goes out.
+        </p>
+
+        <div class="case-list">
+          <article class="case-card">
+            <p class="case-offering">Support tickets</p>
+            <h3>About six hours a week back on the queue.</h3>
+            <p class="case-persona">Sarah, operations lead, Leeds</p>
+            <dl class="case-parts">
+              <div class="case-part">
+                <dt>Problem</dt>
+                <dd>New tickets sat while the team searched old threads for answers they had already given. One person owned the queue.</dd>
+              </div>
+              <div class="case-part">
+                <dt>What we did</dt>
+                <dd>On the office Macs, a local workflow drafts a first reply from recent resolved tickets. Sarah reads every draft and sends it herself.</dd>
+              </div>
+              <div class="case-part">
+                <dt>Outcome</dt>
+                <dd>Routine drafts are ready in a few minutes. Sarah puts the time saved at about six hours a week, mostly from less searching. Anything unusual still waits for her.</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="case-card">
+            <p class="case-offering">Revenue ops and CRM</p>
+            <h3>Required fields filled about 12 per cent more often.</h3>
+            <p class="case-persona">James, revenue manager, Manchester</p>
+            <dl class="case-parts">
+              <div class="case-part">
+                <dt>Problem</dt>
+                <dd>Leads went quiet for days before anyone noticed, and call notes rarely made it into the CRM fields.</dd>
+              </div>
+              <div class="case-part">
+                <dt>What we did</dt>
+                <dd>On James's Mac, a local workflow reads that day's notes and suggests the empty fields. It also lists leads with no contact in five days. He confirms each change before it is saved.</dd>
+              </div>
+              <div class="case-part">
+                <dt>Outcome</dt>
+                <dd>Over six weeks, the required fields were filled about 12 per cent more often. Leads with no recent contact show up the same afternoon.</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="case-card">
+            <p class="case-offering">Finance and back office</p>
+            <h3>About four hours back at each month end.</h3>
+            <p class="case-persona">Priya, finance manager, Bristol</p>
+            <dl class="case-parts">
+              <div class="case-part">
+                <dt>Problem</dt>
+                <dd>Month end meant matching invoices to bank lines by hand, chasing missing documents, and getting papers ready to file.</dd>
+              </div>
+              <div class="case-part">
+                <dt>What we did</dt>
+                <dd>On the finance Mac, a local check compares the bank export with the invoice folder and lists the lines that do not match. Priya approves any chase note before it is sent.</dd>
+              </div>
+              <div class="case-part">
+                <dt>Outcome</dt>
+                <dd>The mismatch list is ready the morning after the export arrives. Priya estimates about four hours back at each close. Unmatched lines fell by about 15 per cent across two closes.</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="case-card">
+            <p class="case-offering">SOP capture</p>
+            <h3>Two colleagues now run the returns process.</h3>
+            <p class="case-persona">Tom, service manager, Sheffield</p>
+            <dl class="case-parts">
+              <div class="case-part">
+                <dt>Problem</dt>
+                <dd>The returns steps lived in Tom's head and a half-updated SOP. When he was away, the team guessed.</dd>
+              </div>
+              <div class="case-part">
+                <dt>What we did</dt>
+                <dd>Over two sessions we wrote the steps he actually follows into a checklist the team runs on their Macs. Refunds stop and wait for Tom.</dd>
+              </div>
+              <div class="case-part">
+                <dt>Outcome</dt>
+                <dd>Two colleagues now finish routine returns without calling him. He still takes the exceptions. New starters ask fewer repeat questions in the first month.</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="case-card">
+            <p class="case-offering">Seven-day pilots</p>
+            <h3>A working workflow on the practice Macs in seven days.</h3>
+            <p class="case-persona">Helen, practice manager, Norwich</p>
+            <dl class="case-parts">
+              <div class="case-part">
+                <dt>Problem</dt>
+                <dd>Helen wanted help with appointment follow-ups, and she wanted to see it working before agreeing to anything longer.</dd>
+              </div>
+              <div class="case-part">
+                <dt>What we did</dt>
+                <dd>In seven days we mapped the follow-up steps and put a draft workflow on the practice Macs. A person checks each note before it is sent.</dd>
+              </div>
+              <div class="case-part">
+                <dt>Outcome</dt>
+                <dd>By day seven the team had tried it on twenty past appointments. Helen kept it for two more weeks, then asked for a second workflow.</dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+        <!-- /PLACEHOLDER case studies -->
+      </div>
+    </section>
+
     <section class="page-section reveal" id="faq">
       <div class="section-inner">
         <span class="section-kicker">FAQ</span>
@@ -879,6 +1064,7 @@
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="#problems">Problems</a>
         <a href="#how">How it works</a>
+        <a href="#cases">Case studies</a>
         <a href="#faq">FAQ</a>
         <a href="#call">Book a call</a>
       </nav>
